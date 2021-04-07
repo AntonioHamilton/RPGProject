@@ -1,4 +1,4 @@
-import { User, IUser } from "@user/models";
+// import { User, IUser } from '@user/models'
 
 const UserController = () => {
   console.log('teste')
