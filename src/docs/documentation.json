@@ -1,0 +1,73 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "RPG Project",
+    "description": "RPG Project its a try to do a rpg website that works for rpg players, play his adventures",
+    "contact": {
+      "email": "antoniohamilton.s.freitas@gmail.com"
+    },
+    "license": {
+      "name": "RPG Project"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "localhost: 3333",
+      "description": "RPG Project API"
+    }
+  ],
+  "paths": {},
+  "components": {
+    "schemas": {
+      "User": {
+        "required": [
+          "name",
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "chatbot"
+          },
+          "email": {
+            "type": "string",
+            "example": "chatbot@gmail.com"
+          },
+          "picture": {
+            "type": "string",
+            "example": "any_url_image"
+          },
+          "rooms": {
+            "type": "array",
+            "format": "uuid",
+            "example": [
+              "c597a2e7-dfe6-4fca-8c57-afcf8bf762c0",
+              "d597a2e7-dfe6-4gca-8c57-afcf8bf762c2"
+            ],
+            "items": {
+              "type": "uuid"
+            }
+          },
+          "timestamps": {
+            "$ref": "#/components/schemas/timestamps"
+          }
+        }
+      },
+      "timestamps": {
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    }
+  }
+}

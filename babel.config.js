@@ -15,7 +15,11 @@ module.exports = {
       'module-resolver',
       {
         alias: {
-          '@user': './src/modules/user'
+          '@user': './src/modules/user',
+          '@constants': './src/constants',
+          '@config/*': './src/config/*',
+          '@database/*': './src/database/*'
+
         }
       }
     ]
