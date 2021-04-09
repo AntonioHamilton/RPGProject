@@ -1,7 +1,8 @@
 import jwt from 'jsonwebtoken'
-import User from '@user/models/index'
+import User from '@user/model/index'
+import { authenticate } from '@libs/encrypter'
 
-export const authenticate = async (req, res) => {
+export const authorization = async (req, res) => {
   try {
     let email = ''
     req.body.email && req.body.password ? email = req.body.email : res.status(400).send('email or password is invalid')
@@ -10,14 +11,14 @@ export const authenticate = async (req, res) => {
 
     if (!user) { return res.status(404).send("this user don't exists!") };
 
-    const auth = await user.authenticate(req.body.password)
+    const auth = await authenticate(user.password, req.body.password)
 
     if (!auth) { return res.status(401).send('Password is invalid') }
 
-    const { name, role } = user
+    const { name, role, _id } = user
 
     const token = jwt.sign({
-      name, email, role
+      name, email, role, _id
     }, 'RPGPR0J3CT', {
       expiresIn: 60 * 60
     })
@@ -28,9 +29,9 @@ export const authenticate = async (req, res) => {
   }
 }
 
-export const isAuthenticated = async (req, res, next) => {
+export const isAuthorizated = async (req, res, next) => {
   try {
-    const BearerToken = req.headers.authentication
+    const BearerToken = req.headers.authorization
     if (!BearerToken) { return res.status(400).send('Token não enviado') }
     const token = BearerToken.split(' ')[1]
     const payload = jwt.verify(token, 'RPGPR0J3CT')

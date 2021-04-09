@@ -21,6 +21,9 @@
       "@user/*": [
         "./src/modules/user/*"
       ],
+      "@room/*": [
+        "./src/modules/room/*"
+      ],
       "@constants/*": [
         "./src/constants/*"
       ],
@@ -29,6 +32,9 @@
       ],
       "@database/*": [
         "./src/database/*"
+      ],
+      "@libs/*": [
+        "./src/libs/*"
       ]
     }
   }

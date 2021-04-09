@@ -1,5 +1,5 @@
 import { Document, model, Schema } from 'mongoose'
-import bcrypt from 'bcrypt'
+import { encryptPassword } from '@libs/encrypter'
 import roles from '@constants/roles'
 
 export interface IUser {
@@ -12,17 +12,18 @@ export interface IUser {
 }
 
 interface IModelUser extends Document, IUser {
-  encryptPassword(string): string
-  authenticate(string): string
+  getUpdate(): Record<string, any>
+  methods: Record<string, Function>
 }
 
 const UserSchema: Schema<IModelUser> = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
+  phone: { type: String, unique: true },
   password: { type: String, required: true },
   picture: { type: String, required: false },
   role: { type: String, required: true, default: roles.member },
-  rooms: { type: Array, required: false, ref: 'Room' }
+  rooms: [{ type: Schema.Types.ObjectId, required: false, ref: 'Room' }]
 }, {
   timestamps: {
     updatedAt: true,
@@ -30,22 +31,19 @@ const UserSchema: Schema<IModelUser> = new Schema({
   }
 })
 
-UserSchema.pre('save', function (next) {
-  if (this.isModified('password')) {
-    this.password = this.encryptPassword(this.password)
+UserSchema.pre<IModelUser>('updateOne', function (next) {
+  const data = this.getUpdate()
+  if (data.password) {
+    data.password = encryptPassword(data.password)
   }
   next()
 })
 
-const salt = 8
-
-UserSchema.methods = {
-  authenticate(plainTextPassword: string): string {
-    return bcrypt.compareSync(plainTextPassword, this.password)
-  },
-  encryptPassword(password: string): string {
-    return bcrypt.hashSync(password, salt)
+UserSchema.pre('save', function (next) {
+  if (this.isModified('password')) {
+    this.password = encryptPassword(this.password)
   }
-}
+  next()
+})
 
 export default model<IModelUser>('User', UserSchema)

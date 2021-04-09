@@ -1,5 +1,5 @@
-import { createUser, getAllUsers } from '@user/controllers'
-import { authenticate, isAuthenticated } from '@user/services/login'
+import { createUser, getAllUsers, recoveryPassword } from '@user/controllers'
+import { authorization, isAuthorizated } from '@user/services/login'
 import { celebrate, Joi, Segments } from 'celebrate'
 
 const UserValidation = celebrate({
@@ -7,19 +7,22 @@ const UserValidation = celebrate({
     name: Joi.string().required(),
     email: Joi.string().email().required(),
     password: Joi.string().required(),
-    picture: Joi.string()
+    picture: Joi.string(),
+    phone: Joi.string()
   })
 })
 
 const userRoutes = (routes) => {
   routes
     .route('/users')
-    .get(isAuthenticated, getAllUsers)
+    .get(isAuthorizated, getAllUsers)
     .post(UserValidation, createUser)
 
   routes
     .route('/login')
-    .post(authenticate)
+    .post(authorization)
+
+  routes.route('/recoverypassword').post(recoveryPassword)
 }
 
 export default userRoutes
