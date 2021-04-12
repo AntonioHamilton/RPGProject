@@ -15,7 +15,9 @@
     "express": "^4.17.1",
     "http": "^0.0.1-security",
     "nodemailer": "^6.5.0",
-    "swagger-ui-express": "^4.1.6"
+    "swagger-ui-express": "^4.1.6",
+    "ts-node": "^9.1.1",
+    "tsconfig-paths": "^3.9.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.13.14",
@@ -38,7 +40,6 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.3",
     "ts-node-dev": "^1.1.6",
-    "tsconfig-paths": "^3.9.0",
     "typescript": "^4.2.3"
   }
 }
