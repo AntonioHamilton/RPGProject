@@ -2,7 +2,7 @@ import { Router } from 'express'
 import userRoutes from '@user/routes'
 import roomRoutes from '@room/routes'
 import swaggerUi from 'swagger-ui-express'
-import docs from '../Docs/documentation.json'
+import docs from '../docs/documentation.json'
 
 const setRoutes = (app) => {
   const router = Router()
