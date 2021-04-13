@@ -1,7 +1,8 @@
 {
   "env": {
     "es2021": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
   "extends": [
     "standard"
@@ -13,6 +14,13 @@
   },
   "plugins": [
     "@typescript-eslint"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "src/**/*.ts"
+      ]
+    }
   ],
   "rules": {
     "space-before-function-paren": "off"

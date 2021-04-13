@@ -1,20 +1,21 @@
 {
   "compilerOptions": {
+    "allowJs": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
     "target": "es2017",
     "module": "commonjs",
-    "lib": [
-      "es6"
-    ],
     "outDir": "./dist",
-    "rootDir": "./src",
-    "removeComments": true,
+    "lib": [
+      "ES6"
+    ],
     "typeRoots": [
       "./node_modules/@types",
-      "./src/types"
+      "./src/@types"
     ],
+    "removeComments": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "skipLibCheck": false,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
@@ -37,5 +38,8 @@
         "./src/libs/*"
       ]
     }
-  }
+  },
+  "include": [
+    "src/**/*.ts"
+  ]
 }
