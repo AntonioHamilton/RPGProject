@@ -7,7 +7,8 @@ export interface IUser {
   email: string
   password: string
   picture: string
-  rooms: Array<string>,
+  favoriteRooms: Array<string>
+  myRooms: Array<string>
   role: string
 }
 
@@ -23,7 +24,8 @@ const UserSchema: Schema<IModelUser> = new Schema({
   password: { type: String, required: true },
   picture: { type: String, required: false },
   role: { type: String, required: true, default: roles.member },
-  rooms: [{ type: Schema.Types.ObjectId, required: false, ref: 'Room' }]
+  favoriteRooms: [{ type: Schema.Types.ObjectId, required: false, ref: 'Room' }],
+  myRooms: [{ type: Schema.Types.ObjectId, required: false, ref: 'Room' }]
 }, {
   timestamps: {
     updatedAt: true,

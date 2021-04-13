@@ -31,7 +31,8 @@ const RoomSchema: Schema<IModelRoom> = new Schema({
   chat: { type: Array, default: [] },
   archives: { type: Array, default: [] },
   description: { type: String },
-  sessions: { type: Array, default: [] }
+  sessions: { type: Array, default: [] },
+  picture: { type: String }
 }, {
   timestamps: {
     updatedAt: true,
