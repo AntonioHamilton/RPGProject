@@ -1,4 +1,4 @@
-import { createRoom, deleteRoom, getAllRooms, updateRoom } from '@room/controllers'
+import { createRoom, deleteRoom, getAllRooms, updateRoom } from '@room/controllers/room'
 import { isTheOwner } from '@room/services/roomOwner'
 import { isAuthorizated } from '@user/services/login'
 import { celebrate, Joi, Segments } from 'celebrate'

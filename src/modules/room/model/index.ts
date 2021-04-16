@@ -1,12 +1,12 @@
 import { Document, model, Schema } from 'mongoose'
 import { encryptPassword } from '@libs/encrypter'
 
-export interface IRoom {
+export interface IRoom extends Document {
   owner: Schema.Types.ObjectId
   name: string
   chat: Array<Record<string, string>>
   password: string
-  archives: Array<Record<string, string>>,
+  archives: Array<Record<string, string>>
   description: String
 }
 
@@ -22,9 +22,7 @@ export interface ISession {
   Message: string
 }
 
-interface IModelRoom extends Document, IRoom { }
-
-const RoomSchema: Schema<IModelRoom> = new Schema({
+const RoomSchema: Schema<IRoom> = new Schema({
   owner: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
   name: { type: String, required: true, unique: true },
   password: { type: String, default: '' },
@@ -47,4 +45,4 @@ RoomSchema.pre('save', function (next) {
   next()
 })
 
-export default model<IModelRoom>('Room', RoomSchema)
+export default model<IRoom>('Room', RoomSchema)

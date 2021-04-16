@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import http from 'http'
 import setRoutes from './routes'
+import { chatServer } from '@room/services/chatSocket'
 
 const setApp = () => {
   const app = express()
@@ -9,6 +10,7 @@ const setApp = () => {
   app.use(cors())
   app.use(express.urlencoded({ extended: true }))
   app.use(express.json())
+  chatServer(server)
   setRoutes(app)
   return server
 }
