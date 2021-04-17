@@ -33,6 +33,7 @@ export const createUser = async (req, res) => {
     })
     res.status(201).send('user created')
   } catch (err) {
+    console.log(err)
     if (err.code === 11000) {
       res.status(400).send('This user already exists')
     }
