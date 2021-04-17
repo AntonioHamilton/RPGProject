@@ -25,6 +25,7 @@ export const createRoom = async (req, res) => {
     })
     res.status(201).send('room created')
   } catch (err) {
+    console.log(err)
     if (err.code === 11000) {
       return res.status(404).send('this room already exists')
     }

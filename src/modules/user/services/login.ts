@@ -40,6 +40,7 @@ export const isAuthorizated = async (req, res, next) => {
     const payload = jwt.verify(token, 'RPGPR0J3CT')
     req.payload = payload
     const user = await User.findOne({ email: payload.email })
+    console.log(user)
     if (!user) {
       return res.status(500).send("You're a ghost user on our system 👻")
     }
