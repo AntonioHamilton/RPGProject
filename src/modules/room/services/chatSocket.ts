@@ -11,7 +11,7 @@ const chatServer = (server) => {
   io.on('connection', (socket) => {
     socket.on('send chat', async (args) => {
       const { chat } = await Room.findById({ _id: args._id })
-      io.emit('chat', chat)
+      io.emit(`chat ${args._id}`, chat)
     })
   })
 }
